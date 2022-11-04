@@ -1,5 +1,6 @@
 import random
 
+#Task 1
 def word_score(word):
     score = 0
     word = word.upper()
@@ -21,6 +22,7 @@ def word_score(word):
         
     return score
 
+#Task 2
 def generateRackRandomly():
     rack = []
     alphabet= ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -35,7 +37,7 @@ def generateRackRandomly():
         
        
 
-
+#Task 3
 def generateRackFromTiles():
     letters=[]
     twelve_times = ['E']
@@ -107,36 +109,41 @@ words = file.readlines()
 
 def valid_words(rack,words):
     for word in words:
-        if len(word) > 7:
+
+        if len(word) > len(rack):
             words.remove(word)
         
         else:
-            word_allowed = False
+            word_allowed = True
             for letter in word:
                 if letter not in rack:
-                    pass
+                    word_allowed = False
                 elif word.count(letter) > rack.count(letter):
-                    pass
+                    word_allowed = False
                 else:
-                    word_allowed = True
+                    pass
             if word_allowed == False:
                 words.remove(word)
             else:
                 pass
     return words        
-        
+
+#Task 4       
 def find_a_valid_word(rack,words):
     options = valid_words(rack,words)
     return options[0]
 
-
+#Task 5
 def longest_valid_word(rack,words):
     options = valid_words(rack,words)
     options.sort(key=lambda word: len(word))
     return options[-1]
 
+#Task 6
 def highest_scoring_word(rack,words):
     options = valid_words(rack,words)
     options.sort(key=lambda word: word_score(word))
     return options[-1]
 
+rack = generateRackRandomly()
+print(valid_words(rack,words))
